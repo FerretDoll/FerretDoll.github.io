@@ -20,30 +20,41 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="一本正经的学习笔记，不太正经的日常生活">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Hello黄同学">
-<meta property="og:url" content="http://example.com/index.html">
+  <meta name="description" content="Apriori算法简介Apriori算法是一种常用的用于挖掘出数据关联规则（Association Rules）的算法，“apriori”在拉丁语中翻译为“来自以前”，顾名思义，这个算法是使用先验知识来预测数据的关联规则。 说到关联规则，我们不得不提到一个经典案例——啤酒与尿布。在这个案例中，沃尔玛发现看似两个无关的商品，它们却经常被一起购买，这是为什么呢？在美国有婴儿的家庭中，一般是母亲在家中照">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Apriori算法详解">
+<meta property="og:url" content="http://example.com/2020/10/15/apriori/index.html">
 <meta property="og:site_name" content="Hello黄同学">
-<meta property="og:description" content="一本正经的学习笔记，不太正经的日常生活">
+<meta property="og:description" content="Apriori算法简介Apriori算法是一种常用的用于挖掘出数据关联规则（Association Rules）的算法，“apriori”在拉丁语中翻译为“来自以前”，顾名思义，这个算法是使用先验知识来预测数据的关联规则。 说到关联规则，我们不得不提到一个经典案例——啤酒与尿布。在这个案例中，沃尔玛发现看似两个无关的商品，它们却经常被一起购买，这是为什么呢？在美国有婴儿的家庭中，一般是母亲在家中照">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/FerretDoll/PictureWarehouse/master/img/apriori1.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/FerretDoll/PictureWarehouse/master/img/apriori2.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/FerretDoll/PictureWarehouse/master/img/apriori3.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/FerretDoll/PictureWarehouse/master/img/apriori4.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/FerretDoll/PictureWarehouse/master/img/apriori5.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/FerretDoll/PictureWarehouse/master/img/apriori6.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/FerretDoll/PictureWarehouse/master/img/apriori7.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/FerretDoll/PictureWarehouse/master/img/apriori8.png">
+<meta property="article:published_time" content="2020-10-15T13:02:04.000Z">
+<meta property="article:modified_time" content="2020-10-15T13:19:08.247Z">
 <meta property="article:author" content="黄同学">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/FerretDoll/PictureWarehouse/master/img/apriori1.png">
 
-<link rel="canonical" href="http://example.com/">
+<link rel="canonical" href="http://example.com/2020/10/15/apriori/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome : true,
-    isPost : false,
+    isHome : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>Hello黄同学</title>
+  <title>Apriori算法详解 | Hello黄同学</title>
   
 
 
@@ -141,9 +152,10 @@
         <div class="content-wrap">
           
 
-          <div class="content index posts-expand">
+          <div class="content post posts-expand">
             
-      
+
+    
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
@@ -159,10 +171,9 @@
       <meta itemprop="name" content="Hello黄同学">
     </span>
       <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/10/15/apriori/" class="post-title-link" itemprop="url">Apriori算法详解</a>
-        </h2>
+        <h1 class="post-title" itemprop="name headline">
+          Apriori算法详解
+        </h1>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -186,7 +197,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="Apriori算法简介"><a href="#Apriori算法简介" class="headerlink" title="Apriori算法简介"></a>Apriori算法简介</h2><p>Apriori算法是一种常用的用于挖掘出数据<strong>关联规则（Association Rules）</strong>的算法，“apriori”在拉丁语中翻译为“来自以前”，顾名思义，这个算法是使用先验知识来预测数据的关联规则。</p>
+        <h2 id="Apriori算法简介"><a href="#Apriori算法简介" class="headerlink" title="Apriori算法简介"></a>Apriori算法简介</h2><p>Apriori算法是一种常用的用于挖掘出数据<strong>关联规则（Association Rules）</strong>的算法，“apriori”在拉丁语中翻译为“来自以前”，顾名思义，这个算法是使用先验知识来预测数据的关联规则。</p>
 <p>说到关联规则，我们不得不提到一个经典案例——啤酒与尿布。在这个案例中，沃尔玛发现看似两个无关的商品，它们却经常被一起购买，这是为什么呢？在美国有婴儿的家庭中，一般是母亲在家中照看婴儿，年轻的父亲前去超市购买尿布，父亲在购买尿布的同时，往往会顺便为自己购买啤酒，这样就会出现啤酒与尿布这两件看上去不相干的商品经常会出现在同一个购物篮的现象。这两种看似不相干的商品之间显现出强相关性，于是商家可以将啤酒货架放在尿布货架旁边以增加收益。</p>
 <p>这个案例中研究啤酒与尿布的关系的方法就叫做“购物篮分析”，本质上就是挖掘数据关联规则，而Apriori算法就是最经典的关联规则挖掘算法。</p>
 <h2 id="相关概念"><a href="#相关概念" class="headerlink" title="相关概念"></a>相关概念</h2><h3 id="支持度（Support）"><a href="#支持度（Support）" class="headerlink" title="支持度（Support）"></a>支持度（Support）</h3><p>数据集中包含该项集的数据所占数据集的比例，度量一个集合在原始数据中出现的频率。关联规则A-&gt;B的支持度$support=P(AB)$，指的是事件A和事件B同时发生的概率（相当于联合概率）。</p>
@@ -310,190 +321,30 @@
 <li>在连接的步骤之前，先利用之前提到的Apriori算法的第三个性质对项集进行筛选，提前删除不满足的项集。对k-1项项集中的每一个元素进行计数，若某个元素的个数小于k-1，则将k-1项集中包含该元素的项集删除。这样可以极大的减小了可能产生的候选项集的数量。</li>
 </ol>
 
-      
     </div>
 
     
     
     
+
       <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/10/15/CentOS8%E4%B8%8B%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AEVNC-Server-VNC-Viewer/">
+        
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="黄同学">
-      <meta itemprop="description" content="一本正经的学习笔记，不太正经的日常生活">
-    </span>
 
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hello黄同学">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/10/15/CentOS8%E4%B8%8B%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AEVNC-Server-VNC-Viewer/" class="post-title-link" itemprop="url">CentOS8下安装配置VNC Server/VNC Viewer</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-10-15 20:25:04 / 修改时间：21:00:35" itemprop="dateCreated datePublished" datetime="2020-10-15T20:25:04+08:00">2020-10-15</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="VNC简介"><a href="#VNC简介" class="headerlink" title="VNC简介"></a>VNC简介</h2><p>VNC (Virtual Network Console)，即虚拟网络控制台，它是一款基于 UNIX 和 Linux 操作系统的优秀远程控制工具软件，由著名的 AT&amp;T 的欧洲研究实验室开发，远程控制能力强大，高效实用，并且免费开源。</p>
-<p>VNC基本上是由两部分组成：一部分是客户端的应用程序(VNC Viewer)；另外一部分是服务器端的应用程序(VNC Server)。</p>
-<p>在任何安装了客户端的应用程序(VNC Viewer)的计算机都能十分方便地与安装了服务器端的应用程序(VNC Server)的计算机相互连接。</p>
-<h2 id="CentOS下VNC-Server安装与配置"><a href="#CentOS下VNC-Server安装与配置" class="headerlink" title="CentOS下VNC Server安装与配置"></a>CentOS下VNC Server安装与配置</h2><p>本人之前已经在服务器上安装了CentOS 8，由于需要进行远程桌面控制，因此首先需要在服务器上安装VNC Server。</p>
-<h3 id="VNC-Server安装命令"><a href="#VNC-Server安装命令" class="headerlink" title="VNC Server安装命令"></a>VNC Server安装命令</h3><p><code># yum install tigervnc-server tigervnc-server-module</code></p>
-<h3 id="编辑VNC配置"><a href="#编辑VNC配置" class="headerlink" title="编辑VNC配置"></a>编辑VNC配置</h3><p>拷贝一个新的模版配置文件</p>
-<p><code># cp /lib/systemd/system/vncserver@.service /etc/systemd/system/vncserver@:1.service</code></p>
-<p>打开配置文件</p>
-<p><code># vi /etc/systemd/system/vncserver@:1.service</code></p>
-<p>将配置文件中的<code>&lt;User&gt;</code>更改为你的用户名，如：root</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description&#x3D;Remote desktop service (VNC)</span><br><span class="line">After&#x3D;syslog.target network.target</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">Type&#x3D;simple</span><br><span class="line"></span><br><span class="line">ExecStartPre&#x3D;&#x2F;bin&#x2F;sh -c ‘&#x2F;usr&#x2F;bin&#x2F;vncserver -kill %i &gt; &#x2F;dev&#x2F;null 2&gt;&amp;1 || :‘</span><br><span class="line">ExecStart&#x3D;&#x2F;usr&#x2F;bin&#x2F;vncserver_wrapper &lt;USER&gt; %i</span><br><span class="line"></span><br><span class="line">ExecStop&#x3D;&#x2F;bin&#x2F;sh -c ‘&#x2F;usr&#x2F;bin&#x2F;vncserver -kill %i &gt; &#x2F;dev&#x2F;null 2&gt;&amp;1 || :‘</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy&#x3D;multi-user.target</span><br></pre></td></tr></table></figure>
-
-<h3 id="更新配置文件"><a href="#更新配置文件" class="headerlink" title="更新配置文件"></a>更新配置文件</h3><p><code># systemctl daemon-reload</code></p>
-<h3 id="设置VNC-Server密码"><a href="#设置VNC-Server密码" class="headerlink" title="设置VNC Server密码"></a>设置VNC Server密码</h3><p>在第一次启动VNC Server前需要设置密码</p>
-<p><code># vncpasswd</code></p>
-<p><code>Password:  #新密码</code></p>
-<p><code>Verify:  #再次输入</code></p>
-<p><code>Would you like to enter a view-only password (y/n)? n</code></p>
-<p><code>A view-only password is not used</code></p>
-<h3 id="启动服务并设为开机启动"><a href="#启动服务并设为开机启动" class="headerlink" title="启动服务并设为开机启动"></a>启动服务并设为开机启动</h3><p><code># systemctl start vncserver@:1.service</code></p>
-<p><code># systemctl enable vncserver@:1.service</code></p>
-<h3 id="检查vnc服务正在监听的端口"><a href="#检查vnc服务正在监听的端口" class="headerlink" title="检查vnc服务正在监听的端口"></a>检查vnc服务正在监听的端口</h3><p><code># netstat -tulpn | grep vnc</code></p>
-<img src="https://raw.githubusercontent.com/FerretDoll/PictureWarehouse/master/img/vnc1.png" width="75%" height="75%">
-
-<h2 id="VNC-Viewer安装与配置"><a href="#VNC-Viewer安装与配置" class="headerlink" title="VNC Viewer安装与配置"></a>VNC Viewer安装与配置</h2><p>在服务器成功安装和配置VNC Server后，还需要在本地安装VNC Viewer进行连接</p>
-<h3 id="安装VNC-Viewer"><a href="#安装VNC-Viewer" class="headerlink" title="安装VNC Viewer"></a>安装VNC Viewer</h3><p>先去官网下载<a target="_blank" rel="noopener" href="https://www.realvnc.com/en/connect/download/viewer/">VNC Viewer</a></p>
-<img src="https://raw.githubusercontent.com/FerretDoll/PictureWarehouse/master/img/vnc2.png" width="75%" height="75%">
-
-<p>安装完成如下</p>
-<img src="https://raw.githubusercontent.com/FerretDoll/PictureWarehouse/master/img/vnc3.png" width="75%" height="75%">
-
-<h3 id="连接服务器"><a href="#连接服务器" class="headerlink" title="连接服务器"></a>连接服务器</h3><p>在VNC Viewer上方输入服务器地址与端口号，然后输入之前设置的VNC Server密码</p>
-<img src="https://raw.githubusercontent.com/FerretDoll/PictureWarehouse/master/img/vnc4.png" width="75%" height="75%">
-
-<p>连接成功后便会显示远程服务器</p>
-<img src="https://raw.githubusercontent.com/FerretDoll/PictureWarehouse/master/img/vnc5.png" width="75%" height="75%">
-
-<p>默认的图像质量为低，可以在设置中调整图像质量</p>
-<img src="https://raw.githubusercontent.com/FerretDoll/PictureWarehouse/master/img/vnc6.png" width="75%" height="75%">
-
-<p>大功告成！现在可以愉快地远程操作服务器了</p>
-
-      
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/10/15/CentOS8%E4%B8%8B%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AEVNC-Server-VNC-Viewer/" rel="prev" title="CentOS8下安装配置VNC Server/VNC Viewer">
+      <i class="fa fa-chevron-left"></i> CentOS8下安装配置VNC Server/VNC Viewer
+    </a></div>
+      <div class="post-nav-item"></div>
     </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
       </footer>
+    
   </article>
   
   
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/10/15/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="黄同学">
-      <meta itemprop="description" content="一本正经的学习笔记，不太正经的日常生活">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hello黄同学">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/10/15/hello-world/" class="post-title-link" itemprop="url">Hello World</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-10-15 19:28:12" itemprop="dateCreated datePublished" datetime="2020-10-15T19:28:12+08:00">2020-10-15</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-
   
 
 
@@ -546,6 +397,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Apriori%E7%AE%97%E6%B3%95%E7%AE%80%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text">Apriori算法简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%B8%E5%85%B3%E6%A6%82%E5%BF%B5"><span class="nav-number">2.</span> <span class="nav-text">相关概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%94%AF%E6%8C%81%E5%BA%A6%EF%BC%88Support%EF%BC%89"><span class="nav-number">2.1.</span> <span class="nav-text">支持度（Support）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BD%AE%E4%BF%A1%E5%BA%A6%EF%BC%88Confidence%EF%BC%89"><span class="nav-number">2.2.</span> <span class="nav-text">置信度（Confidence）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%91%E7%B9%81k%E9%A1%B9%E9%9B%86%EF%BC%88Frequent-k-Itemset%EF%BC%89"><span class="nav-number">2.3.</span> <span class="nav-text">频繁k项集（Frequent k Itemset）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Apriori%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86"><span class="nav-number">3.</span> <span class="nav-text">Apriori算法原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Apriori%E7%AE%97%E6%B3%95%E6%80%A7%E8%B4%A8"><span class="nav-number">3.1.</span> <span class="nav-text">Apriori算法性质</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Apriori%E7%AE%97%E6%B3%95%E8%BF%87%E7%A8%8B"><span class="nav-number">3.2.</span> <span class="nav-text">Apriori算法过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%B1%E9%A2%91%E7%B9%81%E9%A1%B9%E9%9B%86%E4%BA%A7%E7%94%9F%E5%BC%BA%E5%85%B3%E8%81%94%E8%A7%84%E5%88%99"><span class="nav-number">3.3.</span> <span class="nav-text">由频繁项集产生强关联规则</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#R%E8%AF%AD%E8%A8%80%E4%B8%AD%E5%AE%9E%E7%8E%B0Apriori%E7%AE%97%E6%B3%95"><span class="nav-number">4.</span> <span class="nav-text">R语言中实现Apriori算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E6%BA%90"><span class="nav-number">4.1.</span> <span class="nav-text">数据源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%A2%E7%B4%A2%E6%80%A7%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90"><span class="nav-number">4.2.</span> <span class="nav-text">探索性数据分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B"><span class="nav-number">4.3.</span> <span class="nav-text">训练模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B3%E8%81%94%E8%A7%84%E5%88%99%E5%8F%AF%E8%A7%86%E5%8C%96"><span class="nav-number">4.4.</span> <span class="nav-text">关联规则可视化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%84%E4%BC%B0%E6%A8%A1%E5%9E%8B%E7%9A%84%E6%80%A7%E8%83%BD"><span class="nav-number">4.5.</span> <span class="nav-text">评估模型的性能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%90%E9%AB%98%E6%A8%A1%E5%9E%8B%E7%9A%84%E6%80%A7%E8%83%BD"><span class="nav-number">4.6.</span> <span class="nav-text">提高模型的性能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Apriori%E7%AE%97%E6%B3%95%E7%9A%84%E7%BC%BA%E7%82%B9%E4%B8%8E%E6%94%B9%E8%BF%9B"><span class="nav-number">4.7.</span> <span class="nav-text">Apriori算法的缺点与改进</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
