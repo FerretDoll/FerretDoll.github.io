@@ -66,6 +66,77 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-CentOS8下安装配置VNC-Server-VNC-Viewer" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/10/15/CentOS8%E4%B8%8B%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AEVNC-Server-VNC-Viewer/" class="article-date">
+  <time datetime="2020-10-15T12:25:04.000Z" itemprop="datePublished">2020-10-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/10/15/CentOS8%E4%B8%8B%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AEVNC-Server-VNC-Viewer/">CentOS8下安装配置VNC Server/VNC Viewer</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="VNC简介"><a href="#VNC简介" class="headerlink" title="VNC简介"></a>VNC简介</h3><p>VNC (Virtual Network Console)，即虚拟网络控制台，它是一款基于 UNIX 和 Linux 操作系统的优秀远程控制工具软件，由著名的 AT&amp;T 的欧洲研究实验室开发，远程控制能力强大，高效实用，并且免费开源。</p>
+<p>VNC基本上是由两部分组成：一部分是客户端的应用程序(VNC Viewer)；另外一部分是服务器端的应用程序(VNC Server)。</p>
+<p>在任何安装了客户端的应用程序(VNC Viewer)的计算机都能十分方便地与安装了服务器端的应用程序(VNC Server)的计算机相互连接。</p>
+<h3 id="CentOS下VNC-Server安装与配置"><a href="#CentOS下VNC-Server安装与配置" class="headerlink" title="CentOS下VNC Server安装与配置"></a>CentOS下VNC Server安装与配置</h3><p>本人之前已经在服务器上安装了CentOS 8，由于需要进行远程桌面控制，因此首先需要在服务器上安装VNC Server。</p>
+<h4 id="VNC-Server安装命令"><a href="#VNC-Server安装命令" class="headerlink" title="VNC Server安装命令"></a>VNC Server安装命令</h4><p><code># yum install tigervnc-server tigervnc-server-module</code></p>
+<h4 id="编辑VNC配置"><a href="#编辑VNC配置" class="headerlink" title="编辑VNC配置"></a>编辑VNC配置</h4><p>拷贝一个新的模版配置文件</p>
+<p><code># cp /lib/systemd/system/vncserver@.service /etc/systemd/system/vncserver@:1.service</code></p>
+<p>打开配置文件</p>
+<p><code># vi /etc/systemd/system/vncserver@:1.service</code></p>
+<p>将配置文件中的<code>&lt;User&gt;</code>更改为你的用户名，如：root</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description&#x3D;Remote desktop service (VNC)</span><br><span class="line">After&#x3D;syslog.target network.target</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">Type&#x3D;simple</span><br><span class="line"></span><br><span class="line">ExecStartPre&#x3D;&#x2F;bin&#x2F;sh -c ‘&#x2F;usr&#x2F;bin&#x2F;vncserver -kill %i &gt; &#x2F;dev&#x2F;null 2&gt;&amp;1 || :‘</span><br><span class="line">ExecStart&#x3D;&#x2F;usr&#x2F;bin&#x2F;vncserver_wrapper &lt;USER&gt; %i</span><br><span class="line"></span><br><span class="line">ExecStop&#x3D;&#x2F;bin&#x2F;sh -c ‘&#x2F;usr&#x2F;bin&#x2F;vncserver -kill %i &gt; &#x2F;dev&#x2F;null 2&gt;&amp;1 || :‘</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy&#x3D;multi-user.target</span><br></pre></td></tr></table></figure>
+
+<h4 id="更新配置文件"><a href="#更新配置文件" class="headerlink" title="更新配置文件"></a>更新配置文件</h4><p><code># systemctl daemon-reload</code></p>
+<h4 id="设置VNC-Server密码"><a href="#设置VNC-Server密码" class="headerlink" title="设置VNC Server密码"></a>设置VNC Server密码</h4><p>在第一次启动VNC Server前需要设置密码</p>
+<p><code># vncpasswd</code></p>
+<p><code>Password:  #新密码</code></p>
+<p><code>Verify:  #再次输入</code></p>
+<p><code>Would you like to enter a view-only password (y/n)? n</code></p>
+<p><code>A view-only password is not used</code></p>
+<h4 id="启动服务并设为开机启动"><a href="#启动服务并设为开机启动" class="headerlink" title="启动服务并设为开机启动"></a>启动服务并设为开机启动</h4><p><code># systemctl start vncserver@:1.service</code></p>
+<p><code># systemctl enable vncserver@:1.service</code></p>
+<h4 id="检查vnc服务正在监听的端口"><a href="#检查vnc服务正在监听的端口" class="headerlink" title="检查vnc服务正在监听的端口"></a>检查vnc服务正在监听的端口</h4><p><code># netstat -tulpn | grep vnc</code></p>
+<p><img src="https://raw.githubusercontent.com/FerretDoll/PictureWarehouse/master/img/vnc1.png"></p>
+<h3 id="VNC-Viewer安装与配置"><a href="#VNC-Viewer安装与配置" class="headerlink" title="VNC Viewer安装与配置"></a>VNC Viewer安装与配置</h3><p>在服务器成功安装和配置VNC Server后，还需要在本地安装VNC Viewer进行连接</p>
+<h4 id="安装VNC-Viewer"><a href="#安装VNC-Viewer" class="headerlink" title="安装VNC Viewer"></a>安装VNC Viewer</h4><p>先去官网下载<a target="_blank" rel="noopener" href="https://www.realvnc.com/en/connect/download/viewer/">VNC Viewer</a></p>
+<p><img src="https://raw.githubusercontent.com/FerretDoll/PictureWarehouse/master/img/vnc2.png"></p>
+<p>安装完成如下</p>
+<p><img src="https://raw.githubusercontent.com/FerretDoll/PictureWarehouse/master/img/vnc3.png"></p>
+<h4 id="连接服务器"><a href="#连接服务器" class="headerlink" title="连接服务器"></a>连接服务器</h4><p>在VNC Viewer上方输入服务器地址与端口号，然后输入之前设置的VNC Server密码</p>
+<p><img src="https://raw.githubusercontent.com/FerretDoll/PictureWarehouse/master/img/vnc4.png"></p>
+<p>连接成功后便会显示远程服务器</p>
+<p><img src="https://raw.githubusercontent.com/FerretDoll/PictureWarehouse/master/img/vnc5.png"></p>
+<p>默认的图像质量为低，可以在设置中调整图像质量</p>
+<p><img src="https://raw.githubusercontent.com/FerretDoll/PictureWarehouse/master/img/vnc6.png"></p>
+<p>大功告成！现在可以愉快地远程操作服务器了</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2020/10/15/CentOS8%E4%B8%8B%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AEVNC-Server-VNC-Viewer/" data-id="ckgasr17l0000nbc24eox0qsm" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2020/10/15/hello-world/" class="article-date">
@@ -115,67 +186,6 @@
 
 
   
-    <article id="post-2020-10-06-vnc" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/10/06/2020-10-06-vnc/" class="article-date">
-  <time datetime="2020-10-06T08:42:19.504Z" itemprop="datePublished">2020-10-06</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="VNC简介"><a href="#VNC简介" class="headerlink" title="VNC简介"></a>VNC简介</h3><p>VNC (Virtual Network Console)，即虚拟网络控制台，它是一款基于 UNIX 和 Linux 操作系统的优秀远程控制工具软件，由著名的 AT&amp;T 的欧洲研究实验室开发，远程控制能力强大，高效实用，并且免费开源。</p>
-<p>VNC基本上是由两部分组成：一部分是客户端的应用程序(VNC Viewer)；另外一部分是服务器端的应用程序(VNC Server)。</p>
-<p>在任何安装了客户端的应用程序(VNC Viewer)的计算机都能十分方便地与安装了服务器端的应用程序(VNC Server)的计算机相互连接。</p>
-<h3 id="CentOS下VNC-Server安装与配置"><a href="#CentOS下VNC-Server安装与配置" class="headerlink" title="CentOS下VNC Server安装与配置"></a>CentOS下VNC Server安装与配置</h3><p>本人之前已经在服务器上安装了CentOS 8，由于需要进行远程桌面控制，因此首先需要在服务器上安装VNC Server。</p>
-<h4 id="VNC-Server安装命令"><a href="#VNC-Server安装命令" class="headerlink" title="VNC Server安装命令"></a>VNC Server安装命令</h4><p><code># yum install tigervnc-server tigervnc-server-module</code></p>
-<h4 id="编辑VNC配置"><a href="#编辑VNC配置" class="headerlink" title="编辑VNC配置"></a>编辑VNC配置</h4><p>拷贝一个新的模版配置文件</p>
-<p><code># cp /lib/systemd/system/vncserver@.service /etc/systemd/system/vncserver@:1.service</code></p>
-<p>打开配置文件</p>
-<p><code># vi /etc/systemd/system/vncserver@:1.service</code></p>
-<p>将配置文件中的<code>&lt;User&gt;</code>更改为你的用户名，如：root</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description&#x3D;Remote desktop service (VNC)</span><br><span class="line">After&#x3D;syslog.target network.target</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">Type&#x3D;simple</span><br><span class="line"></span><br><span class="line">ExecStartPre&#x3D;&#x2F;bin&#x2F;sh -c ‘&#x2F;usr&#x2F;bin&#x2F;vncserver -kill %i &gt; &#x2F;dev&#x2F;null 2&gt;&amp;1 || :‘</span><br><span class="line">ExecStart&#x3D;&#x2F;usr&#x2F;bin&#x2F;vncserver_wrapper &lt;USER&gt; %i</span><br><span class="line"></span><br><span class="line">ExecStop&#x3D;&#x2F;bin&#x2F;sh -c ‘&#x2F;usr&#x2F;bin&#x2F;vncserver -kill %i &gt; &#x2F;dev&#x2F;null 2&gt;&amp;1 || :‘</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy&#x3D;multi-user.target</span><br></pre></td></tr></table></figure>
-
-<h4 id="更新配置文件"><a href="#更新配置文件" class="headerlink" title="更新配置文件"></a>更新配置文件</h4><p><code># systemctl daemon-reload</code></p>
-<h4 id="设置VNC-Server密码"><a href="#设置VNC-Server密码" class="headerlink" title="设置VNC Server密码"></a>设置VNC Server密码</h4><p>在第一次启动VNC Server前需要设置密码</p>
-<p><code># vncpasswd</code></p>
-<p><code>Password:  #新密码</code></p>
-<p><code>Verify:  #再次输入</code></p>
-<p><code>Would you like to enter a view-only password (y/n)? n</code></p>
-<p><code>A view-only password is not used</code></p>
-<h4 id="启动服务并设为开机启动"><a href="#启动服务并设为开机启动" class="headerlink" title="启动服务并设为开机启动"></a>启动服务并设为开机启动</h4><p><code># systemctl start vncserver@:1.service</code></p>
-<p><code># systemctl enable vncserver@:1.service</code></p>
-<h4 id="检查vnc服务正在监听的端口"><a href="#检查vnc服务正在监听的端口" class="headerlink" title="检查vnc服务正在监听的端口"></a>检查vnc服务正在监听的端口</h4><p><code># netstat -tulpn | grep vnc</code></p>
-<p><img src="https://raw.githubusercontent.com/FerretDoll/PictureWarehouse/master/img/vnc1.png"></p>
-<h3 id="VNC-Viewer安装与配置"><a href="#VNC-Viewer安装与配置" class="headerlink" title="VNC Viewer安装与配置"></a>VNC Viewer安装与配置</h3><p>在服务器成功安装和配置VNC Server后，还需要在本地安装VNC Viewer进行连接</p>
-<h4 id="安装VNC-Viewer"><a href="#安装VNC-Viewer" class="headerlink" title="安装VNC Viewer"></a>安装VNC Viewer</h4><p>先去官网下载<a target="_blank" rel="noopener" href="https://www.realvnc.com/en/connect/download/viewer/">VNC Viewer</a></p>
-<p><img src="https://raw.githubusercontent.com/FerretDoll/PictureWarehouse/master/img/vnc2.png"></p>
-<p>安装完成如下</p>
-<p><img src="https://raw.githubusercontent.com/FerretDoll/PictureWarehouse/master/img/vnc3.png"></p>
-<h4 id="连接服务器"><a href="#连接服务器" class="headerlink" title="连接服务器"></a>连接服务器</h4><p>在VNC Viewer上方输入服务器地址与端口号，然后输入之前设置的VNC Server密码</p>
-<p><img src="https://raw.githubusercontent.com/FerretDoll/PictureWarehouse/master/img/vnc4.png"></p>
-<p>连接成功后便会显示远程服务器</p>
-<p><img src="https://raw.githubusercontent.com/FerretDoll/PictureWarehouse/master/img/vnc5.png"></p>
-<p>默认的图像质量为低，可以在设置中调整图像质量</p>
-<p><img src="https://raw.githubusercontent.com/FerretDoll/PictureWarehouse/master/img/vnc6.png"></p>
-<p>大功告成！现在可以愉快地远程操作服务器了</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2020/10/06/2020-10-06-vnc/" data-id="ckgas9oha0001hgc207jk0b62" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
 
 
 </section>
@@ -207,11 +217,11 @@
       <ul>
         
           <li>
-            <a href="/2020/10/15/hello-world/">Hello World</a>
+            <a href="/2020/10/15/CentOS8%E4%B8%8B%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AEVNC-Server-VNC-Viewer/">CentOS8下安装配置VNC Server/VNC Viewer</a>
           </li>
         
           <li>
-            <a href="/2020/10/06/2020-10-06-vnc/">(no title)</a>
+            <a href="/2020/10/15/hello-world/">Hello World</a>
           </li>
         
       </ul>
