@@ -8,7 +8,7 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
-  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <link rel="mask-icon" href="/images/favicon-16x16.png" color="#222">
 
 <link rel="stylesheet" href="/css/main.css">
 
@@ -36,7 +36,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/FerretDoll/PictureWarehouse/master/img/apriori7.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/FerretDoll/PictureWarehouse/master/img/apriori8.png">
 <meta property="article:published_time" content="2020-10-15T13:02:04.000Z">
-<meta property="article:modified_time" content="2020-10-16T05:23:06.163Z">
+<meta property="article:modified_time" content="2020-10-16T06:56:22.830Z">
 <meta property="article:author" content="黄同学">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://raw.githubusercontent.com/FerretDoll/PictureWarehouse/master/img/apriori1.png">
@@ -189,7 +189,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-10-16 13:23:06" itemprop="dateModified" datetime="2020-10-16T13:23:06+08:00">2020-10-16</time>
+                <time title="修改时间：2020-10-16 14:56:22" itemprop="dateModified" datetime="2020-10-16T14:56:22+08:00">2020-10-16</time>
               </span>
 
           
@@ -205,7 +205,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>9.5k</span>
+              <span>9.6k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -268,8 +268,8 @@
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; itemFrequency(Groceries[,<span class="number">1</span>:<span class="number">3</span>])</span><br><span class="line">frankfurter     sausage  liver loaf </span><br><span class="line"><span class="number">0.058973055</span> <span class="number">0.093950178</span> <span class="number">0.005083884</span> </span><br></pre></td></tr></table></figure>
 <p>通过以上数据我们可以得出以下结果：</p>
 <ol>
-<li>该数据集一共有9835行（交易记录），169列（所有交易的商品种类），因此矩阵中共有$9835<em>169=1662115$个位置，我们可以得出，在30天内共有$1662115</em>0.02609146=43367$件商品被购买，进一步可以得出在每次交易中包含了$43367/9835=4.409$件商品被购买；</li>
-<li>most frequent items：列出了事务型数据中最常购买的商品。whole milk在9835次交易中被购买了2513次，因此我们可以得出结论：whole milk有2513/9835=25.6%的概率出现在所有的交易中；</li>
+<li>该数据集一共有9835行（交易记录），169列（所有交易的商品种类），因此矩阵中共有$9835\ast169=1662115$个位置，我们可以得出，在30天内共有$1662115\ast0.02609146=43367$件商品被购买，进一步可以得出在每次交易中包含了$43367/9835=4.409$件商品被购买；</li>
+<li>most frequent items：列出了事务型数据中最常购买的商品。whole milk在9835次交易中被购买了2513次，因此我们可以得出结论：whole milk有$2513/9835=25.6\%$的概率出现在所有的交易中；</li>
 <li>element (itemset/transaction) length distribution：呈现了一组关于交易规模的统计，总共有2159次交易中包含一件商品，有1次交易中包含了32件商品。我们可以看出，25%的交易中包含了两件或者更少的商品，大约一半的交易中商品数量不超过3件。</li>
 </ol>
 <p>为了直观地呈现统计数据，可以使用itemFrequenctyPlot()函数生成一个用于描绘所包含的特定商品的交易比例的柱状图。因为包含很多种商品，不可能同时展现出来，因此可以通过support或者topN参数进行排除一部分商品进行展示。</p>
@@ -286,7 +286,7 @@
 <p>如果参数设置过高，那么结果可能是没有规则或者规则过于普通而不是非常有用的规则；如果阈值太低，可能会导致规则数量很多，甚至需要运行很长的时间或者在学习阶段耗尽内存。</p>
 <p>aprior()函数默认设置$support=0.1$和$confidence=0.8$。</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; apriori(Groceries)</span><br><span class="line">set of <span class="number">0</span> rules</span><br></pre></td></tr></table></figure>
-<p>因为$support=0.1$，则意味着该商品必须至少出现在$0.1 * 9835 = 983.5$次交易中，在前面的分析中，我们发现只有8种商品的$support&gt;=0.1$，因此使用默认的设置没有产生任何规则也不足为奇。</p>
+<p>因为$support=0.1$，则意味着该商品必须至少出现在$0.1 \ast 9835 = 983.5$次交易中，在前面的分析中，我们发现只有8种商品的$support&gt;=0.1$，因此使用默认的设置没有产生任何规则也不足为奇。</p>
 <p>解决支持度设定问题的一种方法是：考虑一个有趣的模式之前，事先想好需要的最小交易数量，例如：我们可以认为如果一种商品一天被购买了2次，一个月也就是60次交易记录，这或许是我们所感兴趣的，据此，可以计算所需要的支持度$support=60/9835=0.006$;</p>
 <p>关于置信度：设置太低，可能会被大量不可靠的规则淹没，设置过高，可能会出现很多显而易见的规则致使我们不能发现有趣的模式；一个合适的置信度水平的选取，取决于我们的分析目标，我们可以尝试以一个保守的值开始，如果发现没有具有可行性的规则，可以降低置信度以拓宽规则的搜索范围。</p>
 <p>在此例中，我们将从置信度0.25开始，这意味着为了将规则包含在结果中，此时规则的正确率至少为25%，这将排除最不可靠的规则</p>
